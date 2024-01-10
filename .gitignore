@@ -1,0 +1,3 @@
+# Project exclude paths
+/_film/target/
+/film_common/target/
