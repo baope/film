@@ -31,7 +31,7 @@ public class MemberEntity implements Serializable {
 	/**
 	 * 
 	 */
-	private String username;
+	private Long username;
 	/**
 	 * 
 	 */

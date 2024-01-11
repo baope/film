@@ -25,4 +25,18 @@ public class InfoServiceImpl extends ServiceImpl<InfoDao, InfoEntity> implements
         return new PageUtils(page);
     }
 
+    public PageUtils queryPageByCountry(Map<String, Object> params)
+    {
+        System.out.println(params.get("country"));
+        if(params.get("country") == null)
+        {
+            return null;
+        }
+        IPage<InfoEntity> page = this.page(
+                new Query<InfoEntity>().getPage(params),
+                new QueryWrapper<InfoEntity>().like("film_country",params.get("country"))
+        );
+        return new PageUtils(page);
+    }
+
 }

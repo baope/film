@@ -4,18 +4,19 @@ import java.util.Arrays;
 import java.util.Map;
 
 
+import com.auth0.jwt.interfaces.Claim;
+import com.film.annotate.UsrLoginToken;
+import com.film.util.JwtUtil;
+import com.film.vo.MemberVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.film.entity.MemberEntity;
 import com.film.service.MemberService;
 import com.common.utils.PageUtils;
 import com.common.utils.R;
 
+import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -31,13 +32,19 @@ public class MemberController {
     @Autowired
     private MemberService memberService;
 
+    @RequestMapping(value = "/signup",method = RequestMethod.POST)
+    public R signup(@RequestBody MemberVo member, HttpServletRequest httpServletRequest){
+        String token = memberService.signup(member);
+        return R.ok().put("token",token);
+    }
+
     /**
      * 列表
      */
+    @UsrLoginToken
     @RequestMapping("/list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = memberService.queryPage(params);
-
         return R.ok().put("page", page);
     }
 

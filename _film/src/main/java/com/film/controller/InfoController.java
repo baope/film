@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Map;
 
 
+import com.film.annotate.UsrLoginToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,6 +31,18 @@ import com.common.utils.R;
 public class InfoController {
     @Autowired
     private InfoService infoService;
+
+
+    /**
+     * 根据地区返回电影
+     */
+    @UsrLoginToken
+    @RequestMapping("/list/country")
+    public R getFilmByCountry(@RequestParam Map<String, Object> params){
+        PageUtils page = infoService.queryPageByCountry(params);
+
+        return R.ok().put("page", page);
+    }
 
     /**
      * 列表

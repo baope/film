@@ -16,5 +16,7 @@ import java.util.Map;
 public interface InfoService extends IService<InfoEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    PageUtils queryPageByCountry(Map<String, Object> params);
 }
 

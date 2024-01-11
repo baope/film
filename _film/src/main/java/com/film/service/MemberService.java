@@ -3,6 +3,7 @@ package com.film.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.common.utils.PageUtils;
 import com.film.entity.MemberEntity;
+import com.film.vo.MemberVo;
 
 import java.util.Map;
 
@@ -16,5 +17,8 @@ import java.util.Map;
 public interface MemberService extends IService<MemberEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    String signup(MemberVo member);
+    public Boolean isexist(Long userId);
 }
 
